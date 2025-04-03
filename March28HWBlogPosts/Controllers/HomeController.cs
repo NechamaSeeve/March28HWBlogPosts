@@ -21,6 +21,9 @@ namespace March28HWBlogPosts.Controllers
             vm.BlogPosts = blogPosts;
             return View(vm);
         }
+
+
+
         public IActionResult ViewBlog(int Id)
         {
             var mgr = new BlogPostsManager(_connectionString);
