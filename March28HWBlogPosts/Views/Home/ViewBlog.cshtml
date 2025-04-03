@@ -1,0 +1,74 @@
+﻿@model ViewBlogViewModel
+<div b-h3z81f26w4 class="container">
+    <main b-h3z81f26w4 role="main" class="pb-3">
+
+        <div class="row">
+
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Title -->
+                <h1 class="mt-4">@Model.BlogPost.Title</h1>
+
+                <!-- Author -->
+                <p class="lead">
+                    by Nechama
+
+                </p>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p>Posted on @Model.BlogPost.DateSubmitted.ToLongDateString()</p>
+
+                
+                @foreach(var s in Model.SplitText)
+                {
+                    <p style="font-size:20px;">@s</p>
+                }
+                
+
+                <!-- Comments Form -->
+                <div class="card my-4">
+                    <h5 class="card-header">Leave a Comment:</h5>
+                    <div class="card-body">
+                        <form method="post" action="/home/addcomment">
+                            <input type="hidden" value="@Model.BlogPost.Id" name="BlogPostId" />
+                            <div class="form-group">
+                                <input id="name" value="@Model.CommenterName" type="text" placeholder="Please enter your name" class="form-control" name="name" />
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Join the discussion" id="content" name="text" class="form-control" rows="3"></textarea>
+                            </div>
+                            <button disabled id="submit"  class="btn btn-primary mt-3">Submit</button>
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+       @foreach(Comment c in Model.Comments)
+        {
+            <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.co/50x50" alt="">
+                <div class="media-body">
+                    <h5>@c.Name</h5>
+                    @c.Text
+                </div>
+            </div>
+        } 
+     
+</div>
+
+</div>
+
+
+    </main>
+</div>
+@section Scripts{
+    <script src="~/index.js"></script>
+}

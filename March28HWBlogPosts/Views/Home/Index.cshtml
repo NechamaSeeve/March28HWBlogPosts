@@ -1,0 +1,68 @@
+﻿@model HomeViewModel
+<div b-h3z81f26w4 class="container">
+
+    <main b-h3z81f26w4 role="main" class="pb-3">
+        <!-- Page Content -->
+        <div class="container">
+
+            <div class="row">
+
+                <!-- Blog Entries Column -->
+                <div class="col-md-8">
+                        <h1 class="my-4">
+                          The Blogging Place
+                        </h1>
+
+                   @foreach(BlogPost blogPosts in Model.BlogPosts)
+                      {   <div class="card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title">
+                                <a style="text-decoration:none;" href="/home/viewblog?id=@blogPosts.Id">@blogPosts.Title</a>
+                            </h2>
+                                 @if (blogPosts.Text.Length < 200)
+                                { 
+                                    <p class="card-text">@blogPosts.Text</p>
+                                }
+                                else
+                                {
+                                    string shortenString = blogPosts.Text.Substring(0, 200);
+
+                                    <p class="card-text">@shortenString...</p>
+                                }
+                                <a href="/home/viewblog?id=@blogPosts.Id" class="btn btn-primary">Read More &rarr;</a>
+                                
+                                
+                            
+                            
+                        </div>
+                        <div class="card-footer text-muted">
+                            @blogPosts.DateSubmitted.Date by
+                           Nechama seeve
+                        </div> 
+                    </div>
+                
+
+                      }
+                      </div>
+                      </div>
+                      </div>
+                      </main>
+                      </div>
+                      
+<ul class="pagination justify-content-center mb-4">
+    @if (!Model.AtTheEnd)
+    {
+        <li class="page-item">
+            <a class="page-link" href="/home/index?page=@(Model.Page+1)"> Older →</a>
+        </li>
+    }
+   
+    @if (!Model.TheFirstPage)
+    {
+        <li class="page-item">
+            <a class="page-link" href="/home/index?page=@(Model.Page-1)">Newer---</a>
+        </li>
+    }
+   
+</ul>
+                   
